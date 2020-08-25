@@ -1,5 +1,6 @@
 import React from "react";
 import RadioButton from "../_shared/RadioButton/RadioButton";
+import { TEST_DATA, SERVER_DATA } from "../../constants/dataSource";
 
 const SelectDataSource = ({ onDataSourceChange }) => {
   return (
@@ -9,7 +10,7 @@ const SelectDataSource = ({ onDataSourceChange }) => {
         id="src-test"
         name="data-source"
         label="Test Data"
-        value="test"
+        value={TEST_DATA}
         defaultChecked={true}
         onChange={onDataSourceChange}
       />
@@ -17,7 +18,7 @@ const SelectDataSource = ({ onDataSourceChange }) => {
         id="src-server"
         name="data-source"
         label="Server Data"
-        value="server"
+        value={SERVER_DATA}
         onChange={onDataSourceChange}
       />
     </form>

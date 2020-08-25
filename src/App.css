@@ -1,29 +1,4 @@
-.row {
-  clear: both;
-}
-
-.country {
-  float: left;
-  width: 250px;
-}
-
-.country form {
-  float: left;
-}
-
-.country .country-input {
-  width: 100px;
-}
-
-.average {
-  float: left;
-  width: 250px;
-}
-
-.horiz-bar {
-  float: left;
-  display: inline-block;
-  background-color: blue;
-  border-style: solid;
-  border-color: black;
+.error {
+  font-weight: bold;
+  color: red;
 }

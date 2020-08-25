@@ -1,0 +1,42 @@
+.row {
+  display: flex;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.country,
+.average {
+  width: 250px;
+}
+
+.average {
+  overflow-wrap: anywhere;
+}
+
+.country .country-input {
+  width: 100px;
+}
+
+.horiz-bar {
+  background-color: blue;
+  border-style: solid;
+  border-color: black;
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .country,
+  .average {
+    width: 200px;
+  }
+}
+
+@media (max-width: 599px) {
+  .row {
+    flex-direction: column;
+  }
+
+  .country,
+  .average {
+    width: 300px;
+  }
+}

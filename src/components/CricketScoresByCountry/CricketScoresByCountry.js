@@ -1,12 +1,13 @@
 import React from "react";
 import { getCountries } from "../../utils/getCountries";
+import "./CricketScoresByCountry.css";
 
-const SearchCountryScores = ({ cricketScoresByCountry }) => {
+const CricketScoresByCountry = ({ cricketScoresByCountry }) => {
   const [country, setCountry] = React.useState("");
   const countries = getCountries(cricketScoresByCountry).map((country) =>
     country.toLowerCase()
   );
-  let averageScore = "A";
+  let averageScore = "-";
   const barWidthStyle = { width: "0px" };
 
   const onCountrySearch = ({ target: { value } }) => {
@@ -40,4 +41,4 @@ const SearchCountryScores = ({ cricketScoresByCountry }) => {
   );
 };
 
-export default SearchCountryScores;
+export default CricketScoresByCountry;

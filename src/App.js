@@ -1,19 +1,21 @@
 import React from "react";
 import SelectDataSource from "./components/SelectDataSource/SelectDataSource";
-import SearchCountryScores from "./components/SearchCountryScores/SearchCountryScores";
+import CricketScoresByCountry from "./components/CricketScoresByCountry/CricketScoresByCountry";
 import {
   getCricketScores,
   getDummyCricketScores,
 } from "./services/cricketScores";
-import { normalizeCricketScores } from "./utils/normalizeCricketScores";
-import { normalizeDummyCricketScores } from "./utils/normalizeDummyCricketScores";
+import { getCricketScoresByCountry } from "./utils/getCricketScoresByCountry";
+import { getDummyCricketScoresByCountry } from "./utils/getDummyCricketScoresByCountry";
+import { TEST_DATA } from "./constants/dataSource";
 import "./App.css";
 
 const App = () => {
-  const [dataSource, setDataSource] = React.useState("test");
+  const [dataSource, setDataSource] = React.useState(TEST_DATA);
   const [cricketScoresByCountry, setCricketScoresByCountry] = React.useState(
     {}
   );
+  const [error, setError] = React.useState(null);
   const searchFieldCount = Array(2).fill();
 
   const onDataSourceChange = ({ target: { value } }) => {
@@ -21,16 +23,18 @@ const App = () => {
   };
   const fetchCricketScores = React.useCallback(async () => {
     let rawResponse, normalizedResponse;
-    if (dataSource === "test") {
+    if (dataSource === TEST_DATA) {
       rawResponse = getDummyCricketScores();
-      normalizedResponse = normalizeDummyCricketScores(rawResponse);
+      normalizedResponse = getDummyCricketScoresByCountry(rawResponse);
     } else {
-      // todo: handle failure
-      const promise = await getCricketScores();
-      rawResponse = await promise.json();
-      normalizedResponse = normalizeCricketScores(rawResponse);
+      try {
+        const promise = await getCricketScores();
+        rawResponse = await promise.json();
+        normalizedResponse = getCricketScoresByCountry(rawResponse);
+      } catch (error) {
+        setError("Error occured, please try again later.");
+      }
     }
-    console.log(normalizedResponse);
     setCricketScoresByCountry(normalizedResponse);
   }, [dataSource]);
 
@@ -42,13 +46,15 @@ const App = () => {
     <main>
       <section>
         <SelectDataSource onDataSourceChange={onDataSourceChange} />
-        {cricketScoresByCountry &&
-          searchFieldCount.map((index) => (
-            <SearchCountryScores
+        {!error &&
+          cricketScoresByCountry &&
+          searchFieldCount.map((_, index) => (
+            <CricketScoresByCountry
               key={index}
               cricketScoresByCountry={cricketScoresByCountry}
             />
           ))}
+        {error && <div className="error">{error}</div>}
       </section>
     </main>
   );

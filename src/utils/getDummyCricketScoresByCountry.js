@@ -1,5 +1,5 @@
-export const normalizeCricketScores = (data) => {
-  return data.reduce((acc, [country, score]) => {
+export const getDummyCricketScoresByCountry = (data) => {
+  const data2 = data.reduce((acc, { country, score }) => {
     return {
       ...acc,
       // doing toLowerCase() for easy search of any country via search field
@@ -9,4 +9,5 @@ export const normalizeCricketScores = (data) => {
       },
     };
   }, {});
+  return data2;
 };
