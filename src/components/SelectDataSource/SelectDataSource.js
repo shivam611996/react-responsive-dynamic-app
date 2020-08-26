@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RadioButton from "../_shared/RadioButton/RadioButton";
 import { TEST_DATA, SERVER_DATA } from "../../constants/dataSource";
 
@@ -23,6 +24,10 @@ const SelectDataSource = ({ onDataSourceChange }) => {
       />
     </form>
   );
+};
+
+SelectDataSource.propTypes = {
+  onDataSourceChange: PropTypes.func.isRequired,
 };
 
 export default SelectDataSource;

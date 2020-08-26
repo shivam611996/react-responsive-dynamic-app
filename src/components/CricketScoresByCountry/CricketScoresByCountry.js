@@ -1,6 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { getCountries } from "../../utils/getCountries";
 import "./CricketScoresByCountry.css";
+
+const barWidthStyle = { width: "0px" };
 
 const CricketScoresByCountry = ({ cricketScoresByCountry }) => {
   const [country, setCountry] = React.useState("");
@@ -8,7 +11,6 @@ const CricketScoresByCountry = ({ cricketScoresByCountry }) => {
     country.toLowerCase()
   );
   let averageScore = "-";
-  const barWidthStyle = { width: "0px" };
 
   const onCountrySearch = ({ target: { value } }) => {
     setCountry(value);
@@ -39,6 +41,10 @@ const CricketScoresByCountry = ({ cricketScoresByCountry }) => {
       </div>
     </div>
   );
+};
+
+CricketScoresByCountry.propTypes = {
+  cricketScoresByCountry: PropTypes.object.isRequired,
 };
 
 export default CricketScoresByCountry;
